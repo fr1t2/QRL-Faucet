@@ -30,7 +30,6 @@ There are a few scripts that this faucet relies on. Most live in the `/script` d
 
 The `/web/php/` directory contains getInfo.php and main.php.
 
-
 `main.php` is the script that the user will `$POST` to. It collects the QRL address, time submitted, IP address *(hashed)* and commits it to the mySQL database. 
 
 > At the top of the `main.php` file are user configurable settings that must be configured for the faucet to work.
@@ -50,53 +49,64 @@ MySQL database is used to store and track the faucet operations. Instructions ca
 
 This instruction assumes a clean installation of Ubuntu 16.04. You will want to set this up on a reliable server connected to a stable network connection with a static IP address for simplicity.
 
-1. [Install Packages](#1---install-packages)
-2. [Install Software](#2---install-software)
-	1. [QRL](#qrl)
-	2. [QRL State](#qrl-state)
-	3. [GoLang](#golang)
-	4. [Faucet](#faucet)
-3. [Config](#3---config)
-	1. [Start QRL](#start-qrl)
-	2. [start qrl_walletd](#start-qrl_walletd)
-	3. [Start The API](#start-the-api)
-	4. [Create Wallet](#create-qrl-wallet)
-	5. [Setup Database](#setup-database)
-	6. [COnfigure The Site](#configure-the-site)
-4. [Automate](#4---sutomate)
-	1. [Cron Job](#cron-job)
-5. [Finish Up](#5---finish-up)
+ 1. [Install Packages](#1---install-packages)
 
+ 2. [Install Software](#2---install-software)
+
+  1. [QRL](#qrl)
+ 
+  2. [QRL State](#qrl-state)
+ 
+  3. [GoLang](#golang)
+ 
+  4. [Faucet](#faucet)
+
+ 3. [Config](#3---config)
+ 
+  1. [Start QRL](#start-qrl)
+ 
+  2. [start qrl_walletd](#start-qrl_walletd)
+ 
+  3. [Start The API](#start-the-api)
+ 
+  4. [Create Wallet](#create-qrl-wallet)
+ 
+  5. [Setup Database](#setup-database)
+ 
+  6. [COnfigure The Site](#configure-the-site)
+
+ 4. [Automate](#4---sutomate)
+
+  1. [Cron Job](#cron-job)
+
+ 5. [Finish Up](#5---finish-up)
 
 **Basic Install Process Outline**
 
-- Start QRL Node
-	- Fully sync the node
- 	- Wallet setup
-- DNS
- 	- Set Hostname and FQDN on server
- 	- Cloudflare
-		- CDN Setup
-		- [Mod_Cloudflare Install](https://www.cloudflare.com/technical-resources/#mod_cloudflare) for real IP addresses
-- Database
-	- Setup Database
-	- User and password
-	- Table and grant privileges
-- Web Server(Apache2)
-	- Certificate
-	- Setup sites available
-	- Move files to web DIR
-	- permissions and owners
-	- apache password for ADMIN site / dashboard
-- Configure Faucet
-	- Script Config
-- Captcha
-	- Coinhive Captcha setup
-- Hardening
- 	- Firewall
-
-
-
+ - Start QRL Node
+  - Fully sync the node
+  - Wallet setup
+ - DNS
+  - Set Hostname and FQDN on server
+  - Cloudflare
+   - CDN Setup
+   - [Mod_Cloudflare Install](https://www.cloudflare.com/technical-resources/#mod_cloudflare) for real IP addresses
+ - Database
+  - Setup Database
+  - User and password
+  - Table and grant privileges
+ - Web Server(Apache2)
+  - Certificate
+  - Setup sites available
+  - Move files to web DIR
+  - permissions and owners
+  - apache password for ADMIN site / dashboard
+ - Configure Faucet
+  - Script Config
+ - Captcha
+  - Coinhive Captcha setup
+ - Hardening
+   - Firewall
 
 ### \#1 - Install packages
 
@@ -123,7 +133,7 @@ pip3 install -U qrl
 
 > \*Optional
 
-I have a hosted repository located at https://github.com/fr1t2/QRL-Nightly-Chain that can be used to speed up the syncing process significantly. 
+I have a hosted repository located at [github.com/fr1t2/QRL-Nightly-Chain](https://github.com/fr1t2/QRL-Nightly-Chain) that can be used to speed up the syncing process significantly. 
 
 After you have followed the instructions over there start the node and it should sync in a short time.
 
@@ -233,7 +243,7 @@ mysql -u root -p
 
 Enter the following to setup a database with the PAYOUT table. 
 
-```bash
+```sql
 CREATE DATABASE faucet;
 CREATE USER 'qrl'@'localhost' IDENTIFIED BY 'Some_Random_Password_Here';
 GRANT ALL PRIVILEGES ON faucet . * TO 'qrl'@'localhost';
@@ -268,7 +278,7 @@ Change the following:
 
 **/var/www/html/php/main.php**
 
-```bash
+```php
 $payoutInterval = 24; #payout interval in hours before user is valid again
 $SQLservername = "localhost"; # database host
 $SQLuser = "qrl"; # Database user
@@ -280,7 +290,7 @@ $hashes = 256; # Amount of hashes before valid, must match index.php
 
 **/var/www/script/payout.py**
 
-```bash
+```python
 host = "localhost" # the location of the database
 user = "qrl" # Database user
 passwd = "YOUR_PASSWORD_HERE" #Database password
@@ -293,8 +303,8 @@ amountToPay = 100 # Quanta in shor (amountToPay*10^9=quanta)
 
 **/var/www/index.php**
 
-```bash
-data-hashes ="256" #Number of hashes before validation, Must match php/main.php
+```php
+data-hashes ="256" # Number of hashes before validation, Must match php/main.php
 data-key ="YOUR_COINHIVE_PUBLIC_KEY_HERE" #Coinhive Public Key
 ```
 
