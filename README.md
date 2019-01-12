@@ -49,63 +49,48 @@ MySQL database is used to store and track the faucet operations. Instructions ca
 
 This instruction assumes a clean installation of Ubuntu 16.04. You will want to set this up on a reliable server connected to a stable network connection with a static IP address for simplicity.
 
- 1. [Install Packages](#1---install-packages)
-
- 2. [Install Software](#2---install-software)
-
-  1. [QRL](#qrl)
- 
-  2. [QRL State](#qrl-state)
- 
-  3. [GoLang](#golang)
- 
-  4. [Faucet](#faucet)
-
- 3. [Config](#3---config)
- 
-  1. [Start QRL](#start-qrl)
- 
-  2. [start qrl_walletd](#start-qrl_walletd)
- 
-  3. [Start The API](#start-the-api)
- 
-  4. [Create Wallet](#create-qrl-wallet)
- 
-  5. [Setup Database](#setup-database)
- 
-  6. [COnfigure The Site](#configure-the-site)
-
- 4. [Automate](#4---sutomate)
-
-  1. [Cron Job](#cron-job)
-
- 5. [Finish Up](#5---finish-up)
+1. [Install Packages](#1---install-packages)
+2. [Install Software](#2---install-software)
+   1. [QRL](#qrl)
+   2. [QRL State](#qrl-state)
+   3. [GoLang](#golang)
+   4. [Faucet](#faucet)
+3. [Config](#3---config)
+   1. [Start QRL](#start-qrl)
+   2. [start qrl_walletd](#start-qrl_walletd)
+   3. [Start The API](#start-the-api)
+   4. [Create Wallet](#create-qrl-wallet)
+   5. [Setup Database](#setup-database)
+   6. [COnfigure The Site](#configure-the-site)
+4. [Automate](#4---sutomate)
+   1. [Cron Job](#cron-job)
+5. [Finish Up](#5---finish-up)
 
 **Basic Install Process Outline**
 
- - Start QRL Node
-  - Fully sync the node
-  - Wallet setup
- - DNS
-  - Set Hostname and FQDN on server
-  - Cloudflare
+- Start QRL Node
+   - Fully sync the node
+- Wallet setup
+- DNS
+   - Set Hostname and FQDN on server
+   - Cloudflare
    - CDN Setup
    - [Mod_Cloudflare Install](https://www.cloudflare.com/technical-resources/#mod_cloudflare) for real IP addresses
- - Database
-  - Setup Database
-  - User and password
-  - Table and grant privileges
- - Web Server(Apache2)
-  - Certificate
-  - Setup sites available
-  - Move files to web DIR
-  - permissions and owners
-  - apache password for ADMIN site / dashboard
- - Configure Faucet
-  - Script Config
- - Captcha
-  - Coinhive Captcha setup
- - Hardening
+- Database
+   - Setup Database
+   - User and password
+   - Table and grant privileges
+- Web Server(Apache2)
+   - Certificate
+   - Setup sites available
+   - Move files to web DIR
+   - permissions and owners
+   - apache password for ADMIN site / dashboard
+- Configure Faucet
+   - Script Config
+- Captcha
+   - Coinhive Captcha setup
+- Hardening
    - Firewall
 
 ### \#1 - Install packages
