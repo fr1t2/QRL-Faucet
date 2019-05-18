@@ -89,6 +89,9 @@ This instruction assumes a clean installation of Ubuntu 16.04. You will want to 
 - Configure Faucet
    - Script Config
 - Captcha
+
+### REWORK CAPTCHA!!
+
    - Coinhive Captcha setup
 - Hardening
    - Firewall
