@@ -20,7 +20,7 @@ $( '#addressForm' ).submit(function( event ) {
 // Post Function for submit button after coinhive
   $.ajax({
     type: 'POST',
-    url: '/php/main.php',
+    url: '/test/web/php/main.php',
     data: form.serialize(),
     dataType: 'json',
     success: function( resp ) {
@@ -35,7 +35,7 @@ $( '#addressForm' ).submit(function( event ) {
       console.log( "data Submitted through POST" );
   //alert the user of the goings on here...
       if (success === true) {
-        document.getElementById("CoinhiveDiv").innerHTML = 
+        document.getElementById("a").innerHTML = 
         "<div class='callout success'>" + 
         "<h1>SUCCESS!</h1>"+
         "<h5>Your Address Has Been Submitted!</h5>"+
@@ -43,7 +43,7 @@ $( '#addressForm' ).submit(function( event ) {
         "</div>";
         }
       else {
-       document.getElementById("CoinhiveDiv").innerHTML = 
+       document.getElementById("a").innerHTML = 
         "<div class='callout alert'>" + 
         "<h3>Sorry, No Dice For You</h3>" +
         "<p>You've been here recently... </p><p>" + resp.DATETIME + " UTC</p>"+

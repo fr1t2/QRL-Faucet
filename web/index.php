@@ -62,7 +62,7 @@
             <br>
             <br>
             <div class="grid-x grid-padding-x" align="center">
-              <div class="small-12 cell" id="CoinhiveDiv">
+              <div class="small-12 cell" id="a">
                 <form data-abide novalidate id="addressForm">
                   <div data-abide-error class="alert callout" style="display: none;">
                     <p><i class="fi-alert"></i> It looks like you have an invalid QRL address there!</p>
@@ -82,21 +82,11 @@
                   <div class="grid-container">
                     <div class="grid-x grid-margin-x">
                       <fieldset class="cell small-12">
-                        <!-- submit button will be automatically disabled and later enabled again when the captcha is solved -->
+
                         <input class="marmalade button" type="submit" value="Submit"/>
                       </fieldset>
                     </div>
-                    <div class="grid-x grid-margin-x">
-                      <div class="cell small-12">
-                        <script src="https://authedmine.com/lib/captcha.min.js" async></script>
-                        <script>
-                          function myCaptchaCallback(token) {
-                          console.log('Hashes reached. Token is: ' + token);
-                          }
-                        </script>
-                        <input type="hidden" name="token" value= "<script>token</script>" />
-                        
-                    </div>
+
                   </div>
                 </form>
               </div>
