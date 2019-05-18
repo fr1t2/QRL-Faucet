@@ -3,7 +3,6 @@
 // This script recieves a $POST from the main page when a user enters a valid QRL address. This is th emeat and potatos of the program.
 // The users IP address is grabbed, hashed and checked against the database alongside the QRL address submitted.
 //
-// The page validates a user is human by mining XMR on coinhive. You will need to setup the seceret key and hashes to count here and some more in the javascript for coinhive.
 **/
 
 // Logging to the default webserver log file as ERROR for all functions. FIXME to normal logging locations
@@ -52,24 +51,7 @@ $PayOutSQL = "INSERT INTO PAYOUT VALUES (NULL, '".$address."', '".$ipHash."', ".
 
 //$CheckPayoutQuery = "SELECT (select count(*) from PAYOUT where QRL_ADDR = '".$address."' OR IP_ADDR = '".$ipHash."')";
 
-//coinhive stuffs
-$coinHivePost_data = [          //array for _POST][]
-    'secret' => $coinhiveSecret, // <- Your secret key
-    'token' => $_POST['coinhive-captcha-token'],
-    'hashes' => $hashes
-];
-$coinHivePost_context = stream_context_create([
-    'http' => [
-        'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-        'method'  => 'POST',
-        'content' => http_build_query($coinHivePost_data)
-    ]
-]);
-$coinHiveUrl = 'https://api.coinhive.com/token/verify';
-$coinHiveResponse = json_decode(file_get_contents($coinHiveUrl, false, $coinHivePost_context));
-// All good. Coinhive Token verified! Do your thing with post data
-if ($coinHiveResponse && $coinHiveResponse->success) {
-    //error_log("Coinhive Response success");
+
         //check the post data for empty
         if (empty($_POST['address'])) {
             error_log("EMPTY address submitted" , 0);
@@ -165,7 +147,7 @@ if ($coinHiveResponse && $coinHiveResponse->success) {
             $data['success'] = false;
             $data['errors']  = $errors;
         } 
-    }
+    
     //send the data back to the users
     header('Content-Type: application/json');
     // return all our data to an AJAX call

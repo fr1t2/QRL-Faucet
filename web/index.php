@@ -95,16 +95,7 @@
                           }
                         </script>
                         <input type="hidden" name="token" value= "<script>token</script>" />
-                        <div class="coinhive-captcha" 
-                          data-hashes="256" 
-                          data-key="DATA_KEY_FROM_COINHIVE"
-                          data-whitelabel="true"
-                          data-disable-elements="input[type=submit]"
-                          data-callback="myCaptchaCallback"
-                        > 
-                          <em>Loading Captcha... Adblock will break this, disable if you want free money!</em>
-                        </div>
-                      </div>
+                        
                     </div>
                   </div>
                 </form>
